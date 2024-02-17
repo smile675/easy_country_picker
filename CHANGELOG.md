@@ -16,3 +16,6 @@ Phone Prefix Code
 Currency
 
 After selecting a country developer can get any data from the "Country Object"
+
+## 0.0.2
+added documentations in README.md. no changes in actual codes.
