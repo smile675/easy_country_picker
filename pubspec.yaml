@@ -1,5 +1,5 @@
 name: easy_country_picker
-description: "A Flutter package which help allow developer to get country related data in one click."
+description: "A simple flutter package to select country with a textfield which provide country code, country name, currency, phone code and continent."
 version: 0.0.1
 homepage:
 
