@@ -50,8 +50,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     country = val;
                   });
                 },
-                inputDecoration:
-                    const InputDecoration(prefixIcon: Icon(Icons.map)),
+                inputDecoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.public),
+                  hintText: 'Select Country',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                ),
               ),
             ),
             const SizedBox(height: 20),
@@ -73,7 +80,23 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
-            )
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () async {
+                await CountryPicker.selectCountry(
+                  context,
+                ).then((value) => {
+                      if (value != null)
+                        {
+                          setState(() {
+                            country = value;
+                          })
+                        }
+                    });
+              },
+              child: const Text("Select Country"),
+            ),
           ],
         ),
       ),

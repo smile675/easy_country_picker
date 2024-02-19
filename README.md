@@ -93,6 +93,37 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 ```
+![Image Alt Text](images\fielddemo.PNG)
+
+or you can use a button to show modalBottomsheet to choose country.
+```dart
+ ElevatedButton(
+              onPressed: () async {
+                await CountryPicker.selectCountry(
+                  context,
+                ).then((value) => {
+                      if (value != null)
+                        {
+                          setState(() {
+                            country = value;
+                          })
+                        }
+                    });
+              },
+              child: const Text("Select Country"),
+            ),
+```
+Configure ModalBottom Sheet using this:
+    double? height,
+    ShapeBorder shape =
+        const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+    Color? backgroundColor,
+    double contentpadding = 10,
+    bool showCloseButton = false,
+![Image Alt Text](images\modalbottomsheet.PNG)
+
+
+
 
 ## Additional information
 
@@ -169,6 +200,8 @@ The textfield does not have any specific size, so wrap with a Sizedbox in order 
         child: CountrySelectionField(),
       ),
 ```
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Donate-yellow)](https://www.paypal.me/smile675/myr5)
 
 
 Please send me an email "scripts.ismail@gmail" if you face any issue. or create a issue on github, i will try my best to respond.

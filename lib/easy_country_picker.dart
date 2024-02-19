@@ -79,3 +79,70 @@ class _CountrySelectionFieldState extends State<CountrySelectionField> {
     );
   }
 }
+
+class CountryPicker {
+  static Future<Country?> selectCountry(
+    BuildContext context, {
+    double? height,
+    ShapeBorder shape =
+        const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+    Color? backgroundColor,
+    double contentpadding = 10,
+    bool showCloseButton = false,
+  }) async {
+    List<Map<String, String>> countries = countryList;
+    countries.sort((a, b) => a['countryName']!.compareTo(b['countryName']!));
+
+    return showModalBottomSheet<Country>(
+      shape: shape,
+      backgroundColor: backgroundColor,
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Container(
+          height: height ?? MediaQuery.of(context).size.height - 40,
+          padding: EdgeInsets.all(contentpadding),
+          child: Column(
+            children: [
+              if (showCloseButton)
+                Container(
+                  width: double.infinity,
+                  alignment: Alignment.centerRight,
+                  child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.close)),
+                ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: countries.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      title: Row(
+                        children: [
+                          Text(countries[index]['countryCode']!),
+                          const SizedBox(width: 10),
+                          Text(countries[index]['countryName']!),
+                        ],
+                      ),
+                      onTap: () {
+                        String countryCode = countries[index]['countryCode']!;
+                        Map<String, String>? selectedCountry =
+                            countries.firstWhere(
+                          (country) => country["countryCode"] == countryCode,
+                        );
+                        Country country = Country.fromMap(selectedCountry);
+                        Navigator.pop(context, country);
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
